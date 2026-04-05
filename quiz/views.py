@@ -1,3 +1,5 @@
+"""Views for the LitQuiz application."""
+
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import QuestionForm
@@ -5,15 +7,18 @@ from .models import Question
 
 
 def home(request):
+    """Render the home page."""
     return render(request, 'home.html')
 
 
 def question_list(request):
+    """Render the page with all questions."""
     questions = Question.objects.all().order_by('id')
     return render(request, 'question_list.html', {'questions': questions})
 
 
 def question_detail(request, pk):
+    """Render the detail page for one question."""
     question = get_object_or_404(Question, pk=pk)
     return render(
         request,
@@ -26,6 +31,7 @@ def question_detail(request, pk):
 
 
 def create_question(request):
+    """Create a new question."""
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
@@ -45,6 +51,7 @@ def create_question(request):
 
 
 def update_question(request, pk):
+    """Update an existing question."""
     question = get_object_or_404(Question, pk=pk)
 
     if request.method == 'POST':
@@ -66,6 +73,7 @@ def update_question(request, pk):
 
 
 def delete_question(request, pk):
+    """Delete an existing question after confirmation."""
     question = get_object_or_404(Question, pk=pk)
 
     if request.method == 'POST':
@@ -83,6 +91,7 @@ def delete_question(request, pk):
 
 
 def quiz_view(request):
+    """Render quiz page and process quiz answers."""
     questions = Question.objects.all().order_by('id')
 
     if not questions.exists():
@@ -136,3 +145,4 @@ def quiz_view(request):
             'page_title': 'Литературный квиз',
         }
     )
+    

@@ -1,0 +1,10 @@
+[MASTER]
+ignore=migrations
+
+[MESSAGES CONTROL]
+disable=
+    no-member,
+    too-few-public-methods
+
+[FORMAT]
+max-line-length=100
