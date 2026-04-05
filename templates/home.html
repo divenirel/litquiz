@@ -11,9 +11,9 @@
             Здесь можно хранить вопросы, редактировать их и проходить тестирование.
         </p>
         <div class="mt-4">
-            <a href="/questions/" class="btn btn-primary btn-lg me-2">Смотреть вопросы</a>
-            <a href="/quiz/" class="btn btn-outline-secondary btn-lg me-2">Пройти квиз</a>
-            <a href="/questions/add/" class="btn btn-outline-dark btn-lg">Добавить вопрос</a>
+            <a href="{% url 'question_list' %}" class="btn btn-primary btn-lg me-2">Смотреть вопросы</a>
+            <a href="{% url 'quiz' %}" class="btn btn-outline-secondary btn-lg me-2">Пройти квиз</a>
+            <a href="{% url 'create_question' %}" class="btn btn-outline-dark btn-lg">Добавить вопрос</a>
         </div>
     </div>
 </div>
