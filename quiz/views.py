@@ -22,7 +22,14 @@ def create_question(request):
     else:
         form = QuestionForm()
 
-    return render(request, 'question_form.html', {'form': form, 'page_title': 'Добавить вопрос'})
+    return render(
+        request,
+        'question_form.html',
+        {
+            'form': form,
+            'page_title': 'Добавить вопрос',
+        }
+    )
 
 
 def update_question(request, pk):
@@ -36,4 +43,28 @@ def update_question(request, pk):
     else:
         form = QuestionForm(instance=question)
 
-    return render(request, 'question_form.html', {'form': form, 'page_title': 'Редактировать вопрос'})
+    return render(
+        request,
+        'question_form.html',
+        {
+            'form': form,
+            'page_title': 'Редактировать вопрос',
+        }
+    )
+
+
+def delete_question(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+
+    if request.method == 'POST':
+        question.delete()
+        return redirect('question_list')
+
+    return render(
+        request,
+        'question_confirm_delete.html',
+        {
+            'question': question,
+            'page_title': 'Удалить вопрос',
+        }
+    )

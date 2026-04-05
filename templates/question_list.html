@@ -36,9 +36,14 @@
                             </p>
                         {% endif %}
 
-                        <a href="/questions/{{ question.id }}/edit/" class="btn btn-outline-primary btn-sm">
-                            Редактировать
-                        </a>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="/questions/{{ question.id }}/edit/" class="btn btn-outline-primary btn-sm">
+                                Редактировать
+                            </a>
+                            <a href="/questions/{{ question.id }}/delete/" class="btn btn-outline-danger btn-sm">
+                                Удалить
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
