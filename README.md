@@ -35,6 +35,7 @@ LitQuiz — это веб-приложение на Django для изучени
 ## Установка и запуск
 
 git clone https://github.com/divenirel/litquiz.git
+
 cd litquiz
 
 python3 -m venv venv
