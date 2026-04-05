@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} | LitQuiz{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <span class="badge bg-secondary mb-2">{{ question.get_category_display }}</span>
+                        <h1 class="mb-0">{{ question.text }}</h1>
+                    </div>
+                </div>
+
+                {% if question.image %}
+                    <div class="mb-4">
+                        <img
+                            src="{{ question.image }}"
+                            class="img-fluid rounded"
+                            alt="Изображение к вопросу"
+                        >
+                    </div>
+                {% endif %}
+
+                <h4 class="mb-3">Варианты ответа</h4>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item">A: {{ question.option_a }}</li>
+                    <li class="list-group-item">B: {{ question.option_b }}</li>
+                    <li class="list-group-item">C: {{ question.option_c }}</li>
+                    <li class="list-group-item">D: {{ question.option_d }}</li>
+                </ul>
+
+                <div class="mb-3">
+                    <p class="mb-1">
+                        <strong>Правильный ответ:</strong> {{ question.correct_answer }}
+                    </p>
+                </div>
+
+                {% if question.explanation %}
+                    <div class="alert alert-light border">
+                        <strong>Пояснение:</strong> {{ question.explanation }}
+                    </div>
+                {% endif %}
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="{% url 'question_list' %}" class="btn btn-secondary">Назад к списку</a>
+                    <a href="{% url 'update_question' question.id %}" class="btn btn-outline-primary">Редактировать</a>
+                    <a href="{% url 'delete_question' question.id %}" class="btn btn-outline-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -13,6 +13,18 @@ def question_list(request):
     return render(request, 'question_list.html', {'questions': questions})
 
 
+def question_detail(request, pk):
+    question = get_object_or_404(Question, pk=pk)
+    return render(
+        request,
+        'question_detail.html',
+        {
+            'question': question,
+            'page_title': 'Детали вопроса',
+        }
+    )
+
+
 def create_question(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)

@@ -15,7 +15,12 @@
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <span class="badge bg-secondary mb-2">{{ question.get_category_display }}</span>
-                        <h5 class="card-title">{{ question.text }}</h5>
+
+                        <h5 class="card-title">
+                            <a href="{% url 'question_detail' question.id %}" class="text-decoration-none text-dark">
+                                {{ question.text }}
+                            </a>
+                        </h5>
 
                         {% if question.image %}
                             <img src="{{ question.image }}" class="img-fluid rounded mb-3" alt="Изображение к вопросу">
@@ -36,7 +41,10 @@
                             </p>
                         {% endif %}
 
-                        <div class="d-flex gap-2 mt-3">
+                        <div class="d-flex gap-2 mt-3 flex-wrap">
+                            <a href="{% url 'question_detail' question.id %}" class="btn btn-outline-dark btn-sm">
+                                Подробнее
+                            </a>
                             <a href="{% url 'update_question' question.id %}" class="btn btn-outline-primary btn-sm">
                                 Редактировать
                             </a>
