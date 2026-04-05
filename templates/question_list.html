@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Список вопросов | LitQuiz{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0">Список вопросов</h1>
+    <a href="/admin/quiz/question/add/" class="btn btn-primary">Добавить вопрос</a>
+</div>
+
+{% if questions %}
+    <div class="row g-4">
+        {% for question in questions %}
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-2">{{ question.get_category_display }}</span>
+                        <h5 class="card-title">{{ question.text }}</h5>
+
+                        {% if question.image %}
+                            <img src="{{ question.image }}" class="img-fluid rounded mb-3" alt="Изображение к вопросу">
+                        {% endif %}
+
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item">A: {{ question.option_a }}</li>
+                            <li class="list-group-item">B: {{ question.option_b }}</li>
+                            <li class="list-group-item">C: {{ question.option_c }}</li>
+                            <li class="list-group-item">D: {{ question.option_d }}</li>
+                        </ul>
+
+                        <p class="mb-1"><strong>Правильный ответ:</strong> {{ question.correct_answer }}</p>
+
+                        {% if question.explanation %}
+                            <p class="text-muted mb-0">
+                                <strong>Пояснение:</strong> {{ question.explanation }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        Пока нет ни одного вопроса.
+    </div>
+{% endif %}
+{% endblock %}
