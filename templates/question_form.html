@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Форма вопроса{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Форма вопроса</h1>
+
+<form method="post" class="card p-4 shadow-sm">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a href="/questions/" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}
