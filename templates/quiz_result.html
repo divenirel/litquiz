@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }} | LitQuiz{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm mb-4">
+    <div class="card-body p-4">
+        <h1 class="mb-3">{{ page_title }}</h1>
+        <p class="fs-5 mb-1">
+            Правильных ответов: <strong>{{ correct_count }}</strong> из <strong>{{ total_questions }}</strong>
+        </p>
+
+        {% if total_questions > 0 %}
+            <p class="text-muted mb-0">
+                Результат: {% widthratio correct_count total_questions 100 %}%
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row g-4">
+    {% for item in answers %}
+        <div class="col-12">
+            <div class="card shadow-sm {% if item.is_correct %}border-success{% else %}border-danger{% endif %}">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ forloop.counter }}. {{ item.question.text }}
+                    </h5>
+
+                    <p class="mb-2">
+                        <strong>Ваш ответ:</strong>
+                        {% if item.user_answer == 'A' %}
+                            A
+                        {% elif item.user_answer == 'B' %}
+                            B
+                        {% elif item.user_answer == 'C' %}
+                            C
+                        {% elif item.user_answer == 'D' %}
+                            D
+                        {% else %}
+                            Не выбран
+                        {% endif %}
+                    </p>
+
+                    <p class="mb-2">
+                        <strong>Правильный ответ:</strong> {{ item.correct_answer }}
+                    </p>
+
+                    {% if item.is_correct %}
+                        <p class="text-success mb-2"><strong>Верно</strong></p>
+                    {% else %}
+                        <p class="text-danger mb-2"><strong>Неверно</strong></p>
+                    {% endif %}
+
+                    {% if item.question.explanation %}
+                        <p class="text-muted mb-0">
+                            <strong>Пояснение:</strong> {{ item.question.explanation }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="mt-4 d-flex gap-2">
+    <a href="/quiz/" class="btn btn-primary">Пройти ещё раз</a>
+    <a href="/questions/" class="btn btn-secondary">К списку вопросов</a>
+</div>
+{% endblock %}

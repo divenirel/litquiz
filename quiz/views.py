@@ -68,3 +68,59 @@ def delete_question(request, pk):
             'page_title': 'Удалить вопрос',
         }
     )
+
+
+def quiz_view(request):
+    questions = Question.objects.all().order_by('id')
+
+    if not questions.exists():
+        return render(
+            request,
+            'quiz.html',
+            {
+                'questions': questions,
+                'page_title': 'Литературный квиз',
+            }
+        )
+
+    if request.method == 'POST':
+        total_questions = questions.count()
+        correct_count = 0
+        answers = []
+
+        for question in questions:
+            user_answer = request.POST.get(f'question_{question.id}', '')
+            correct_answer = question.correct_answer.upper()
+            is_correct = user_answer == correct_answer
+
+            if is_correct:
+                correct_count += 1
+
+            answers.append(
+                {
+                    'question': question,
+                    'user_answer': user_answer,
+                    'correct_answer': correct_answer,
+                    'is_correct': is_correct,
+                }
+            )
+
+        return render(
+            request,
+            'quiz_result.html',
+            {
+                'page_title': 'Результат квиза',
+                'total_questions': total_questions,
+                'correct_count': correct_count,
+                'answers': answers,
+            }
+        )
+
+    return render(
+        request,
+        'quiz.html',
+        {
+            'questions': questions,
+            'page_title': 'Литературный квиз',
+        }
+    )
