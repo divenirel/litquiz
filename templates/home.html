@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная | LitQuiz{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-4 shadow-sm">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">Добро пожаловать в LitQuiz 📚</h1>
+        <p class="col-md-8 fs-5">
+            LitQuiz — это веб-приложение для изучения литературы в формате квиза.
+            Здесь можно хранить вопросы, редактировать их и проходить тестирование.
+        </p>
+        <div class="mt-4">
+            <a href="#" class="btn btn-primary btn-lg me-2">Смотреть вопросы</a>
+            <a href="#" class="btn btn-outline-secondary btn-lg">Пройти квиз</a>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Удобный список вопросов</h5>
+                <p class="card-text">
+                    Все литературные вопросы будут храниться в одном месте.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Добавление и редактирование</h5>
+                <p class="card-text">
+                    Можно создавать новые вопросы и изменять существующие.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Проверка знаний</h5>
+                <p class="card-text">
+                    Пользователь сможет проходить квиз и сразу видеть результат.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
